@@ -11,7 +11,7 @@ app.get('/', function(req, res) {
 });
 
 io.sockets.on('connection', function(socket) {
-	console.log("testteest");
+	console.log("Piplinetest");
 	socket.on('new user', function(data, callback) {
 		if (data in users) {
 			callback(false);
