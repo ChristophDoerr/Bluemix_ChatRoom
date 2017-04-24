@@ -10,7 +10,22 @@ app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/index.html');
 });
 
+
+var cloudant = {
+        url : "https://c446af86-b321-4984-876a-f6de4da3bab3-bluemix.cloudant.com"
+};
+var nano = require("nano")(cloudant.url),
+db = nano.db.use("users");
+
+
+
 io.sockets.on('connection', function(socket) {
+	
+	db.insert({ _id: "penis"}, function(err, body) {
+		  if (!err){
+			  console.log(body);
+		  }
+		});
 	console.log("Piplinetest");
 	socket.on('new user', function(data, callback) {
 		if (data in users) {
