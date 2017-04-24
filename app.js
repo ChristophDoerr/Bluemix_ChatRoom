@@ -1,3 +1,24 @@
+var appEnv = cfenv.getAppEnv();
+  var dbCreds =  appEnv.getServiceCreds('Cloudant NoSQL DB-08');  
+  var nano;
+  var prints;  
+  var cloudant = {
+		  url : "https://cd01382f-fb5a-4ba8-91eb-90711c0bf890-bluemix:e458604d6682e3144429086aed374ded2ae1944e91dfa08218a6a27155affab7@cd01382f-fb5a-4ba8-91eb-90711c0bf890-bluemix.cloudant.com"          	
+			  // TODO: Update                  
+  }; 
+  var nano = require("nano")(cloudant.url);
+  var db = nano.db.use("usercredentials");
+	if (dbCreds) {
+		console.log('URL is ' + dbCreds.url); 	
+		nano = require('nano')(dbCreds.url); 	
+		prints = nano.use('prints'); 
+	} else {  
+		console.log('NO DB!'); 
+	}
+
+
+
+
 var express = require('express');
 app = express();
 server = require('http').createServer(app);
@@ -11,12 +32,12 @@ app.get('/', function(req, res) {
 });
 
 
-var cloudant = {
-        url : "https://c446af86-b321-4984-876a-f6de4da3bab3-bluemix.cloudant.com"
-};
-var nano = require("nano")(cloudant.url);
-
-var db = nano.db.use("users");
+//var cloudant = {
+//        url : "https://c446af86-b321-4984-876a-f6de4da3bab3-bluemix.cloudant.com"
+//};
+//var nano = require("nano")(cloudant.url);
+//
+//var db = nano.db.use("users");
 
 
 
