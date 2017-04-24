@@ -25,6 +25,8 @@ io.sockets.on('connection', function(socket) {
 	db.insert({ _id: "penis"}, function(err, body) {
 		  if (!err){
 			  console.log(body);
+		  }else{
+			  console.log(err);
 		  }
 		});
 	console.log("Piplinetest");
