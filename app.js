@@ -1,3 +1,4 @@
+var cfenv = require('cfenv');
 var appEnv = cfenv.getAppEnv();
   var dbCreds =  appEnv.getServiceCreds('Cloudant NoSQL DB-08');  
   var nano;
