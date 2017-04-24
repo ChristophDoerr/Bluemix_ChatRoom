@@ -5,7 +5,7 @@ var appEnv = cfenv.getAppEnv();
   var prints;  
   var cloudant = {
 		  url : "https://choullesterfaceregandthe:7651a4e8ac97356acdef64752f7bced8adaeb016@c446af86-b321-4984-876a-f6de4da3bab3-bluemix.cloudant.com"        	
-			  // TODO: Update s                 
+			  //TODO: Update s                 
   }; 
   var nano = require("nano")(cloudant.url);
   var db = nano.db.use("users");
