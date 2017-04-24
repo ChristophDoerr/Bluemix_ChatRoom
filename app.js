@@ -14,8 +14,9 @@ app.get('/', function(req, res) {
 var cloudant = {
         url : "https://c446af86-b321-4984-876a-f6de4da3bab3-bluemix.cloudant.com"
 };
-var nano = require("nano")(cloudant.url),
-db = nano.db.use("users");
+var nano = require("nano")(cloudant.url);
+
+var db = nano.db.use("users");
 
 
 
