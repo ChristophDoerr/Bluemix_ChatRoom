@@ -7,7 +7,7 @@ var appEnv = cfenv.getAppEnv();
 			  // TODO: Update                  
   }; 
   var nano = require("nano")(cloudant.url);
-  var db = nano.db.use("usercredentials");
+  var db = nano.db.use("users");
 	if (dbCreds) {
 		console.log('URL is ' + dbCreds.url); 	
 		nano = require('nano')(dbCreds.url); 	
