@@ -45,11 +45,7 @@ io.sockets.on('connection', function(socket) {
 		} else {
 			callback(true);
 			
-			db.get(username, function(err, dataGet) {
-				if (!err){
-					  callback(false);
-				  }
-				
+
 			socket.nickname = data;
 			users[socket.nickname] = socket;
 			
