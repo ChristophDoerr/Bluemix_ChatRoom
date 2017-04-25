@@ -44,8 +44,9 @@ io.sockets.on('connection', function(socket) {
 			 console.log("TEEEEEEEEEEEEEEEEEEEEEEEEST");
 			callback(false);
 		} else {
-			callback(true);
 			 console.log("TEEEEEEEEEEEEEEEEEEEEEEEEST");
+			callback(true);
+			
 			db.get("Hans", function(err, dataGet) {
 				if (!err){
 					  console.log(dataGet.id);
