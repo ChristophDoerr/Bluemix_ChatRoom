@@ -47,10 +47,11 @@ io.sockets.on('connection', function(socket) {
 			
 			db.get(username, function(err, dataGet) {
 				if (!err){
+					 console.log("test1");
 					  callback(false);
 				  }else{
 					  
-					  console.log(db.get(password));
+					  console.log("test2");
 				  }});
 
 			socket.nickname = data;
