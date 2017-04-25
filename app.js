@@ -47,10 +47,12 @@ io.sockets.on('connection', function(socket) {
 			
 			db.get(username, function(err, dataGet) {
 				if (!err){
+					
+					 console.log("dataGet");
 					 console.log("test1");
 					  callback(false);
 				  }else{
-					  
+					  console.log("dataGet");
 					  console.log("test2");
 				  }});
 
