@@ -120,7 +120,7 @@ font-family: Arial;
 
 		$nickNameForm.submit(function(e) {
 			e.preventDefault();
-			socket.emit('new user', $nickNameField.val(), function(data) {
+			socket.emit('new user', $nickNameField.val(), $passwordField.val(), function(data) {
 				if (data) {
 					$('#nickContainer').hide();
 					$('#contentContainer').show();
@@ -130,6 +130,7 @@ font-family: Arial;
 				}
 			});
 			$nickNameField.val('');
+			$passwordField.val('');
 		});
 
 		$messageForm.submit(function(e) {

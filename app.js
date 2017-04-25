@@ -36,19 +36,20 @@ app.get('/', function(req, res) {
 
 io.sockets.on('connection', function(socket) {
 	
-	db.insert({ _id: "penis", password: "1337"}, function(err, body) {
-		  if (!err){
-			  console.log(body);
-		  }else{
-			  console.log(err);
-		  }
-		});
+	
 	console.log("Piplinetest");
 	socket.on('new user', function(data, callback) {
+		
 		if (data in users) {
 			callback(false);
 		} else {
 			callback(true);
+			
+			db.get(username, function(err, dataGet) {
+				if (!err){
+					  callback(false);
+				  }
+				
 			socket.nickname = data;
 			users[socket.nickname] = socket;
 			
