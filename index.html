@@ -122,6 +122,7 @@ font-family: Arial;
 			e.preventDefault();
 			socket.emit('new user', $nickNameField.val(), $passwordField.val(), function(data) {
 				if (data) {
+					console.log("indexTEST");
 					$('#nickContainer').hide();
 					$('#contentContainer').show();
 
