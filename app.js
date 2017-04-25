@@ -49,7 +49,6 @@ io.sockets.on('connection', function(socket) {
 				if (!err){
 					  console.log(dataGet.password);
 					
-					  callback(false);
 				
 				  }else{
 					  console.log(dataGet.password);
