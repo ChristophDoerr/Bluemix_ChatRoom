@@ -67,12 +67,19 @@ font-family: Arial;
 
 	<div id="nickContainer">
 	<div class="panel panel-primary">
-	<div class="panel-heading"><p>Enter a nickname:</p></div>
+	<div class="panel-heading"><p>Login:</p></div>
 	<div class="panel-body">
-		<p id="nickNameChecker"></p>
+		<p id="nickNameChecker">Username:</p>
 		<form id="setNickname">
-			<input size="35" id="nickname"></input> <input class="btn btn-primary" type="submit" value="Join"></input>
+			<input size="35" id="nickname"></input> 
 		</form>
+		
+		<p id="passwordChecker">Password:</p>
+		<form id="setPassword">
+			<input size="35" id="password"></input> 
+		</form>
+		</br>
+		<input class="btn btn-primary" type="submit" value="Login"></input>
 	</div>
 </div>
 </div>
@@ -101,8 +108,11 @@ font-family: Arial;
 	jQuery(function($) {
 		var socket = io.connect();
 		var $nickNameForm = $('#setNickname');
+		var $passwordForm = $('#setPassword');
 		var $nickNameChecker = $('#nickNameChecker');
+		var $passwordChecker = $('#passwordChecker');
 		var $nickNameField = $('#nickname');
+		var $passwordField = $('#password');
 		var $user = $('#user')
 		var $messageForm = $('#send-message');
 		var $messageBox = $('#message');
