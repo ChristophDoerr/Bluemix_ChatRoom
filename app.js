@@ -41,10 +41,11 @@ io.sockets.on('connection', function(socket) {
 	socket.on('new user', function(data, callback) {
 		
 		if (data in users) {
+			 console.log("TEEEEEEEEEEEEEEEEEEEEEEEEST");
 			callback(false);
 		} else {
 			callback(true);
-			
+			 console.log("TEEEEEEEEEEEEEEEEEEEEEEEEST");
 			db.get("Hans", function(err, dataGet) {
 				if (!err){
 					  console.log(dataGet.id);
