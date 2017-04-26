@@ -33,18 +33,16 @@ app.enable('trust proxy');
 server.listen(8080);
 
 app.use(function (req, res, next) {
-	console.log("USE Function");
     if (req.secure) {
-            // request was via https, so do no special handling
+        
             next();
     } else {
-            // request was via http, so redirect to https
+ 
             res.redirect('https://' + req.headers.host + req.url);
     }
 });
 
 app.get('/', function(req, res) {
-	//res.setHeader("Content-Security-Policy");
 	res.sendFile(__dirname + '/index.html');
 });
 
@@ -54,19 +52,17 @@ app.get('/', function(req, res) {
 io.sockets.on('connection', function(socket) {
 	
 
-	console.log("Piplinetest");
 	socket.on('new user', function(data, callback) {
 		if (data.nick in users) {
 			callback(false);
 		} else {
 			
-			
-			console.log("NICK: " + data.nick);
+	;
 			db.get(data.nick, function(err, dataGet) {
 				if (!err){
 					if (dataGet.password == data.pw){
 						
-					console.log("PASSWORD:" + dataGet.password);
+		
 					
 				
 					socket.nickname = data.nick;
