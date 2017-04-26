@@ -24,6 +24,8 @@ var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 
+var port = (process.env.PORT || process.env.VCAP_APP_PORT || 3000);
+
 
 var io = require('socket.io').listen(server);
 var users = {};
@@ -36,9 +38,11 @@ app.use(function (req, res, next) {
 	console.log("USE Function");
     if (req.secure) {
             // request was via https, so do no special handling
+    	console.logs("tesxt");
             next();
     } else {
             // request was via http, so redirect to https
+    	console.logs("tesxt");
             res.redirect('https://' + req.headers.host + req.url);
     }
 });

@@ -117,7 +117,7 @@
 				window.alert("VOR EMIT");
 		
 				e.preventDefault();
-			socket.emit('new user', {nick: $nickNameField.val() , pw: $passwordField.val()}, function(data) {
+					socket.emit('new user', {nick: $nickNameField.val() , pw: $passwordField.val()}, function(data) {
 					window.alert("DATA: " + data);
 					if (data) {
 						$('#nickContainer').hide();
