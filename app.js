@@ -43,6 +43,7 @@ app.use(function (req, res, next) {
 });
 
 app.get('/', function(req, res) {
+	res.setHeader("Content-Security-Policy");
 	res.sendFile(__dirname + '/index.html');
 });
 
@@ -52,17 +53,19 @@ app.get('/', function(req, res) {
 io.sockets.on('connection', function(socket) {
 	
 
+
 	socket.on('new user', function(data, callback) {
 		if (data.nick in users) {
 			callback(false);
 		} else {
 			
-	;
+			
+			
 			db.get(data.nick, function(err, dataGet) {
 				if (!err){
 					if (dataGet.password == data.pw){
 						
-		
+				
 					
 				
 					socket.nickname = data.nick;
