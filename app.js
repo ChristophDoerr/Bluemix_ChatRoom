@@ -1,10 +1,11 @@
 var cfenv = require('cfenv');
 var appEnv = cfenv.getAppEnv();
- var dbCreds =  appEnv.getServiceCreds('Cloudant NoSQL DB-08');  
- var nano;
- var prints;  
- var cloudant = {
-		  url : "https://c446af86-b321-4984-876a-f6de4da3bab3-bluemix:aeb8123f68f6f64116c92fdea258bbadaa3fcf83349192fe69913687e3726750@c446af86-b321-4984-876a-f6de4da3bab3-bluemix.cloudant.com"     	         
+  var dbCreds =  appEnv.getServiceCreds('Cloudant NoSQL DB-08');  
+  var nano;
+  var prints;  
+  var cloudant = {
+		  url : "https://c446af86-b321-4984-876a-f6de4da3bab3-bluemix:aeb8123f68f6f64116c92fdea258bbadaa3fcf83349192fe69913687e3726750@c446af86-b321-4984-876a-f6de4da3bab3-bluemix.cloudant.com"     	
+			  //TODO: Update s                 
   }; 
   var nano = require("nano")(cloudant.url);
   var db = nano.db.use("users");
@@ -32,29 +33,30 @@ app.get('/', function(req, res) {
 });
 
 
+//var cloudant = {
+//        url : "https://c446af86-b321-4984-876a-f6de4da3bab3-bluemix.cloudant.com"
+//};
+//var nano = require("nano")(cloudant.url);
+//
+//var db = nano.db.use("users");
+
 
 
 io.sockets.on('connection', function(socket) {
 	
-	
+	db.insert({ _id: "penis"}, function(err, body) {
+		  if (!err){
+			  console.log(body);
+		  }else{
+			  console.log(err);
+		  }
+		});
 	console.log("Piplinetest");
 	socket.on('new user', function(data, callback) {
-		
 		if (data in users) {
-			 console.log("TEEEEEEEEEEEEEEEEEEEEEEEEST");
 			callback(false);
 		} else {
-			 console.log("TEEEEEEEEEEEEEEEEEEEEEEEEST");
 			callback(true);
-			
-			db.get("Hans", function(err, dataGet) {
-				if (!err){
-					  console.log(dataGet.id);
-					
-				  }else{
-					  console.log(dataGet.id);
-				  }});
-
 			socket.nickname = data;
 			users[socket.nickname] = socket;
 			

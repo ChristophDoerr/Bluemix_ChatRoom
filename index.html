@@ -5,196 +5,100 @@
 <title>ChatRoom</title>
 <style>
 #chat {
-	font-family: Arial;
-
-	width: 100%;
-	height : 400px;
-    overflow: auto;
-}
-
-
-
-
-	
-#panel-body{
-height: 40%;
+	height: 500px;
 }
 
 #contentContainer {
-font-family: Arial;
 	display: none;
 }
 
 #chatContainer {
-font-family: Arial;
-width: 40%;
-}
-
-#user{
-font-family: Arial;
-}
-
-#nickContainer{
-width: 40%;
-}
-.error {
-	color: red;
-}
-
-#message{
-width: 80%;
-
-}
-
-#message-submit{
-
-width: 18%;
-}
-
-.whisper {
-	color: gray;
-	front-style: italic;
-}
-#nickContainer{
-font-family: Arial;
+	float: left;
+	border: 1px #000 solid;
 }
 </style>
 </head>
 <body>
-<div class="page-header">
-  <h1>Simple Chat <small>by Christoph  D&ouml;rr, Niko Filippidis</small></h1>
-</div>
-
 	<div id="nickContainer">
-	<div class="panel panel-primary">
-	<div class="panel-heading"><p>Login:</p></div>
-	<div class="panel-body">
-		<p id="nickNameChecker">Username:</p>
+		<p>Enter a nickname:</p>
+		<p id="nickNameChecker"></p>
 		<form id="setNickname">
-			<input size="35" id="nickname"></input> <input class="btn btn-primary" type="submit" value="Login"></input>
+			<input size="35" id="nickname"></input> <input type="submit"></input>
 		</form>
-		
-		<p id="passwordChecker">Password:</p>
-		<form id="setPassword">
-			<input type="password" size="35" id="password"></input> 
-		</form>
-		</br>
-		
 	</div>
-</div>
-</div>
+
 	<div id="contentContainer">
-
-
-
 		<div id="chatContainer">
-		<div class="panel panel-primary">
-			<div id="user" class="panel-heading">	Sie sind angemeldet als: </div>
-			<div id="chat" class="panel-body"></div>
-			</div>
+			<div id="chat"></div>
 			<form id="send-message">
-				<input  id="message"></input> <input class="btn btn-primary" id="message-submit" type="submit" value="send"></input>
+				<input size="35" id="message"></input> <input type="submit"></input>
 			</form>
 		</div>
-		
+		<div id="user"></div>
 	</div>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script>
-	
-	
-	jQuery(function($) {
-		var socket = io.connect();
-		var $nickNameForm = $('#setNickname');
-		var $passwordForm = $('#setPassword');
-		var $nickNameChecker = $('#nickNameChecker');
-		var $passwordChecker = $('#passwordChecker');
-		var $nickNameField = $('#nickname');
-		var $passwordField = $('#password');
-		var $user = $('#user')
-		var $messageForm = $('#send-message');
-		var $messageBox = $('#message');
-		var $chat = $('#chat');
+		jQuery(function($) {
+			var socket = io.connect();
+			var $nickNameForm = $('#setNickname');
+			var $nickNameChecker = $('#nickNameChecker');
+			var $nickNameField = $('#nickname');
+			var $users = $('#user')
+			var $messageForm = $('#send-message');
+			var $messageBox = $('#message');
+			var $chat = $('#chat');
 
-		$nickNameForm.submit(function(e) {
-			e.preventDefault();
-			socket.emit('new user', $nickNameField.val(), $passwordField.val(), function(data) {
-				if (data) {
-					console.log("indexTeeeeST");
-					$('#nickContainer').hide();
-					$('#contentContainer').show();
+			$nickNameForm.submit(function(e) {
+				e.preventDefault();
+				socket.emit('new user', $nickNameField.val(), function(data) {
+					if (data) {
+						$('#nickContainer').hide();
+						$('#contentContainer').show();
+						
 
-				} else {
-					$nickNameChecker.html('Username is not avaliable!')
+					} else {
+						$nickNameChecker.html('Username is not usable!')
+					}
+				});
+				$nickNameField.val('');
+			});
+
+			socket.on('usernames', function(data) {
+				var html = '';
+				for (i = 0; i < data.length; i++) {
+					html += data[i] + '<br/>'
 				}
+				$users.html(html);
 			});
-			$nickNameField.val('TEST');
-			$passwordField.val('TEST');
-		});
 
-		$messageForm.submit(function(e) {
-			e.preventDefault();
-			socket.emit('send message', $messageBox.val(), function(data) {
-				$chat
-						.append('<span class="error">' + data
-								+ "</span><br/>");
+			$messageForm.submit(function(e) {
+				e.preventDefault();
+				socket.emit('send message', $messageBox.val());
+				$messageBox.val('');
+
 			});
-			$messageBox.val('');
-
+			socket.on('new message', function(data) {
+				var time = new Date(data.time);
+				
+				$chat.append(time.getHours() + ':' + time.getMinutes() + ' Uhr ' + '<b>' +data.nick + ': </b>' + data.msg + "<br/>");
+			});
+			
+			
+			socket.on('new UserJoined', function(data) {
+				$chat.append(data.nick  + ' has joined the room ' + '<br/>');
+			});
+			
+			
+			socket.on('new UserDisconnected', function(data) {
+				$chat.append(data.nick  + ' has left the room ' + '<br/>');
+			});
+			
+			
+			
 		});
-		
-		socket.on('new message', function(data) {
-			var time = new Date(data.time);
-			$chat.append('<span class="msg">' + (time.getHours() < 10 ? '0' + time.getHours() : time.getHours())
-            + ':' +
-            (time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes()) + ' Uhr ' + '<b>' + data.nick
-					+ ': </b>' + data.msg + '</span><br/>');
-		});
-
-		socket.on('new UserJoined', function(data) {
-			$chat.append(data.nick + ' has joined the room ' + '<br/>');
-		});
-
-		socket.on('new UserDisconnected', function(data) {
-			$chat.append(data.nick + ' has left the room ' + '<br/>');
-		});
-
-	/*	socket.on('username', function(data) {
-			console.log(data);
-			var tmp = '';
-			for (i = 0; i < data.length; i++) {
-				tmp += data[i] + '<br/>'
-			}
-			$user.append(tmp);
-		});*/
-
-		socket.on('whisper', function(data) {
-			$chat.append('<span class="whisper">' + data.nick + ': '
-					+ data.msg + '</span><br/>');
-		});
-		
-		socket.on('whisperSelf', function(data) {
-			$chat.append( data.nick + ' private message  '
-					+ data.msg + '</span><br/>');
-		});
-		
-		socket.on('userlist', function(data) {
-			$chat.append(  ' >>Server<< current users online: '
-					+ data.msg + '<br/>');
-		});
-	
-		socket.on('username', function(data) {
-			$user.append(data.nick);
-		});
-		
-	});
-
-	
-	
 	</script>
-
-	
 </body>
 </html>
