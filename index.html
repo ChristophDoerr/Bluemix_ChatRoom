@@ -113,7 +113,7 @@
 
 			$nickNameForm.submit(function() {
 				window.alert("VOR EMIT");
-				return false;
+				
 				//e.preventDefault();
 				socket.emit('new user', {nick: $nickNameField.val() , pw: $passwordField.val()}, function(data) {
 					window.alert("DATA: " + data);
