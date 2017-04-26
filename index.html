@@ -107,20 +107,20 @@
 			window.alert("VOR EMIT");
 		
 			//e.preventDefault();
-			socket.emit('new user', {nick: nickname.val() , pw: password.val()}, function(data) {
-				window.alert("DATA: " + data);
-				if (data) {
-					('nickContainer').hide();
-					('#ontentContainer').show();
-					window.alert("container show");
+		//	socket.emit('new user', {nick: nickname.val() , pw: password.val()}, function(data) {
+			//	window.alert("DATA: " + data);
+		//		if (data) {
+		//			('nickContainer').hide();
+		//			('#ontentContainer').show();
+		//			window.alert("container show");
 
-				} else {
-					$nickNameChecker.html('Username is not avaliable!')
-				}
-			});
-			window.alert("Clear");
-			nickname.val('');
-			password.val('');
+		//		} else {
+		//			$nickNameChecker.html('Username is not avaliable!')
+		//		}
+		//	});
+		//	window.alert("Clear");
+		//	nickname.val('');
+		//	password.val('');
 			
 			
 	
