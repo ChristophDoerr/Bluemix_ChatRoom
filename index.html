@@ -99,34 +99,8 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
-	<script>
-	function send(){
-	//	var socket = io.connect();
-		
 	
-			window.alert("VOR EMIT");
-		
-			//e.preventDefault();
-		//	socket.emit('new user', {nick: nickname.val() , pw: password.val()}, function(data) {
-			//	window.alert("DATA: " + data);
-		//		if (data) {
-		//			('nickContainer').hide();
-		//			('#ontentContainer').show();
-		//			window.alert("container show");
-
-		//		} else {
-		//			$nickNameChecker.html('Username is not avaliable!')
-		//		}
-		//	});
-		//	window.alert("Clear");
-		//	nickname.val('');
-		//	password.val('');
-			
-			
 	
-	}
-	
-	</script>
 	<script>
 		jQuery(function($) {
 			var socket = io.connect();
@@ -139,27 +113,27 @@
 			var $messageBox = $('#message');
 			var $chat = $('#chat');
 
-//		$nickNameForm.submit(function(e) {
-//				window.alert("VOR EMIT");
-	//		
-				//e.preventDefault();
-		//		socket.emit('new user', {nick: $nickNameField.val() , pw: $passwordField.val()}, function(data) {
-			//		window.alert("DATA: " + data);
-				//	if (data) {
-					//	$('#nickContainer').hide();
-						//$('#contentContainer').show();
-	//					window.alert("container show");
+		$nickNameForm.submit(function(e) {
+				window.alert("VOR EMIT");
+		
+				e.preventDefault();
+			socket.emit('new user', {nick: $nickNameField.val() , pw: $passwordField.val()}, function(data) {
+					window.alert("DATA: " + data);
+					if (data) {
+						$('#nickContainer').hide();
+						$('#contentContainer').show();
+					window.alert("container show");
 
-		//			} else {
-	//					$nickNameChecker.html('Username is not avaliable!')
-	//				}
-	//			});
-	//			window.alert("Clear");
-	//			$nickNameField.val('');
-	//			$passwordField.val('');
-	//			
-	//			e.preventDefault();
-	//		});
+					} else {
+						$nickNameChecker.html('Username is not avaliable!')
+					}
+				});
+				window.alert("Clear");
+				$nickNameField.val('');
+				$passwordField.val('');
+				
+				e.preventDefault();
+			});
 
 			$messageForm.submit(function(e) {
 				e.preventDefault();

@@ -31,6 +31,7 @@ var users = {};
 server.listen(8080);
 
 app.get('/', function(req, res) {
+	res.setHeader("Content-Security-Policy");
 	res.sendFile(__dirname + '/index.html');
 });
 
