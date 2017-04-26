@@ -112,13 +112,13 @@
 			var $chat = $('#chat');
 
 			$nickNameForm.submit(function(e) {
-				e.preventDefault();
+				//e.preventDefault();
 				socket.emit('new user', {nick: $nickNameField.val() , pw: $passwordField.val()}, function(data) {
-					console.log("DATA: " + data);
+					window.alert("DATA: " + data);
 					if (data) {
 						$('#nickContainer').hide();
 						$('#contentContainer').show();
-						console.logs("container show");
+						window.alert("container show");
 
 					} else {
 						$nickNameChecker.html('Username is not avaliable!')
