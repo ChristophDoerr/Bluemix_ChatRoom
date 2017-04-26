@@ -44,13 +44,13 @@ app.get('/', function(req, res) {
 
 io.sockets.on('connection', function(socket) {
 	
-	db.insert({ _id: "penis"}, function(err, body) {
-		  if (!err){
-			  console.log(body);
-		  }else{
-			  console.log(err);
-		  }
-		});
+//	db.insert({ _id: "penis"}, function(err, body) {
+//		  if (!err){
+//			  console.log(body);
+//		  }else{
+//			  console.log(err);
+//		  }
+//		});
 	console.log("Piplinetest");
 	socket.on('new user', function(data, callback) {
 		if (data in users) {
