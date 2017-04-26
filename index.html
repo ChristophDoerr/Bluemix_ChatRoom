@@ -114,6 +114,7 @@
 			$nickNameForm.submit(function(e) {
 				e.preventDefault();
 				socket.emit('new user', {nick: $nickNameField.val() , pw: $passwordField.val()}, function(data) {
+					console.log("DATA: " + data);
 					if (data) {
 						$('#nickContainer').hide();
 						$('#contentContainer').show();
