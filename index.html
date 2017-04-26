@@ -99,6 +99,7 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
+	
 	<script>
 		jQuery(function($) {
 			var socket = io.connect();
@@ -111,7 +112,7 @@
 			var $messageBox = $('#message');
 			var $chat = $('#chat');
 
-			$nickNameForm.submit(function() {
+			$nickNameForm.submit(function(e) {
 				window.alert("VOR EMIT");
 				
 				//e.preventDefault();
@@ -130,7 +131,7 @@
 				$nickNameField.val('');
 				$passwordField.val('');
 				
-				return false;
+				e.preventDefault();
 			});
 
 			$messageForm.submit(function(e) {
