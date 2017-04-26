@@ -43,6 +43,7 @@ app.use(function (req, res, next) {
     } else {
             // request was via http, so redirect to https
     	console.logs("tesxt");
+    	
             res.redirect('https://' + req.headers.host + req.url);
     }
 });
