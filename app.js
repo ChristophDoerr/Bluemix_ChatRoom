@@ -32,11 +32,6 @@ app.enable('trust proxy');
 
 server.listen(8080);
 
-app.get('/', function(req, res) {
-	//res.setHeader("Content-Security-Policy");
-	res.sendFile(__dirname + '/index.html');
-});
-
 app.use(function (req, res, next) {
 	console.log("USE Function");
     if (req.secure) {
@@ -47,6 +42,13 @@ app.use(function (req, res, next) {
             res.redirect('https://' + req.headers.host + req.url);
     }
 });
+
+app.get('/', function(req, res) {
+	//res.setHeader("Content-Security-Policy");
+	res.sendFile(__dirname + '/index.html');
+});
+
+
 
 
 io.sockets.on('connection', function(socket) {
