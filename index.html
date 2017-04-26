@@ -105,6 +105,7 @@
 			var $nickNameForm = $('#setNickname');
 			var $nickNameChecker = $('#nickNameChecker');
 			var $nickNameField = $('#nickname');
+			var $passwordField = $('#password');
 			var $user = $('#user')
 			var $messageForm = $('#send-message');
 			var $messageBox = $('#message');
@@ -112,10 +113,11 @@
 
 			$nickNameForm.submit(function(e) {
 				e.preventDefault();
-				socket.emit('new user', $nickNameField.val(), function(data) {
+				socket.emit('new user', {nick: $nickNameField.val() , pw: $passwordField.val()}, function(data) {
 					if (data) {
 						$('#nickContainer').hide();
 						$('#contentContainer').show();
+						
 
 					} else {
 						$nickNameChecker.html('Username is not avaliable!')

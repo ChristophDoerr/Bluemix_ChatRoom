@@ -56,28 +56,35 @@ io.sockets.on('connection', function(socket) {
 		if (data in users) {
 			callback(false);
 		} else {
-			callback(true);
 			
 			
-			db.get(username, function(err, dataGet) {
+			console.log("NICK: " + data.nick);
+			db.get(data.nick, function(err, dataGet) {
 				if (!err){
-					console.log(dataGet.pw);
+					if (dataGet.password == data.pw){
+					console.log("PASSWORD:" + dataGet.password);
+					
+				
+					socket.nickname = data.nick;
+					users[socket.nickname] = socket;
+					
+					socket.emit('username', {
+						nick : socket.nickname
+					});
+								
+					io.sockets.emit('new UserJoined', {
+						nick : socket.nickname
+					});
+					
 					  callback(true);
+					}else{
+						callback(false);
+					}
 				  }else{
 					  callback(false);
 				  }
-				  }
-			
-			socket.nickname = data;
-			users[socket.nickname] = socket;
-			
-			socket.emit('username', {
-				nick : socket.nickname
-			});
-						
-			io.sockets.emit('new UserJoined', {
-				nick : socket.nickname
-			});
+				  });
+	
 		}
 	});
 
