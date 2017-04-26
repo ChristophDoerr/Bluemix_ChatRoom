@@ -117,13 +117,14 @@
 					if (data) {
 						$('#nickContainer').hide();
 						$('#contentContainer').show();
-						
+						console.logs("container show");
 
 					} else {
 						$nickNameChecker.html('Username is not avaliable!')
 					}
 				});
 				$nickNameField.val('');
+				$passwordField.val('');
 			});
 
 			$messageForm.submit(function(e) {

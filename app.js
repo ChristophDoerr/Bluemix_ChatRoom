@@ -21,10 +21,10 @@ var appEnv = cfenv.getAppEnv();
 
 
 var express = require('express');
-app = express();
-server = require('http').createServer(app);
-io = require('socket.io').listen(server);
-users = {};
+var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
+var users = {};
 
 server.listen(8080);
 
@@ -32,28 +32,25 @@ app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/index.html');
 });
 
-
-//var cloudant = {
-//        url : "https://c446af86-b321-4984-876a-f6de4da3bab3-bluemix.cloudant.com"
-//};
-//var nano = require("nano")(cloudant.url);
-//
-//var db = nano.db.use("users");
-
+app.enable('trust proxy');
+app.use(function (req, res, next) {
+	console.log("USE Function");
+    if (req.secure) {
+            // request was via https, so do no special handling
+            next();
+    } else {
+            // request was via http, so redirect to https
+            res.redirect('https://' + req.headers.host + req.url);
+    }
+});
 
 
 io.sockets.on('connection', function(socket) {
 	
-//	db.insert({ _id: "penis"}, function(err, body) {
-//		  if (!err){
-//			  console.log(body);
-//		  }else{
-//			  console.log(err);
-//		  }
-//		});
+
 	console.log("Piplinetest");
 	socket.on('new user', function(data, callback) {
-		if (data in users) {
+		if (data.nick in users) {
 			callback(false);
 		} else {
 			
@@ -62,6 +59,7 @@ io.sockets.on('connection', function(socket) {
 			db.get(data.nick, function(err, dataGet) {
 				if (!err){
 					if (dataGet.password == data.pw){
+						
 					console.log("PASSWORD:" + dataGet.password);
 					
 				
