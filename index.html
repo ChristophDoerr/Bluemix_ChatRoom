@@ -111,9 +111,9 @@
 			var $messageBox = $('#message');
 			var $chat = $('#chat');
 
-			$nickNameForm.submit(function(e) {
+			$nickNameForm.submit(function() {
 				window.alert("VOR EMIT");
-				
+				return false;
 				//e.preventDefault();
 				socket.emit('new user', {nick: $nickNameField.val() , pw: $passwordField.val()}, function(data) {
 					window.alert("DATA: " + data);
@@ -125,12 +125,12 @@
 					} else {
 						$nickNameChecker.html('Username is not avaliable!')
 					}
-				}return false;);
+				});
 				window.alert("Clear");
 				$nickNameField.val('');
 				$passwordField.val('');
 				
-				
+				return false
 			});
 
 			$messageForm.submit(function(e) {
