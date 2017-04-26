@@ -43,7 +43,7 @@ app.use(function (req, res, next) {
 });
 
 app.get('/', function(req, res) {
-	res.setHeader("Content-Security-Policy");
+	res.setHeader('Content-Security-Policy');
 	res.sendFile(__dirname + '/index.html');
 });
 
