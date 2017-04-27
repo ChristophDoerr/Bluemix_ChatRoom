@@ -29,17 +29,11 @@ var appEnv = cfenv.getAppEnv();
 
 
 
-  app.use(helmet.csp({
-	  defaultSrc: ["'self'"],
-	  scriptSrc: ['*.google-analytics.com'],
-	  styleSrc: ["'unsafe-inline'"],
-	  imgSrc: ['*.google-analytics.com'],
-	  connectSrc: ["'none'"],
-	  fontSrc: [],
-	  objectSrc: [],
-	  mediaSrc: [],
-	  frameSrc: []
+  app.use(helmet.hsts({
+	  maxAge: 7776000000,
+	  includeSubdomains: true
 	}));
+
 
 	
 
