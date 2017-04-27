@@ -37,7 +37,7 @@ var appEnv = cfenv.getAppEnv();
 
   app.use(helmet());
 
-app.use(helmet.csp({
+app.use(helmet.contentSecurityPolicy({
 	
 
 		  // Specify directives as normal.
