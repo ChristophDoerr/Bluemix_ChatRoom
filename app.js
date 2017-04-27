@@ -21,24 +21,17 @@ var appEnv = cfenv.getAppEnv();
   var nano;
   var prints;  
   var cloudant = {
-		  url : "https://c446af86-b321-4984-876a-f6de4da3bab3-bluemix:aeb8123f68f6f64116c92fdea258bbadaa3fcf83349192fe69913687e3726750@c446af86-b321-4984-876a-f6de4da3bab3-bluemix.cloudant.com"     	
-			  //TODO: Update s                 
+		  url : "https://c446af86-b321-4984-876a-f6de4da3bab3-bluemix:aeb8123f68f6f64116c92fdea258bbadaa3fcf83349192fe69913687e3726750@c446af86-b321-4984-876a-f6de4da3bab3-bluemix.cloudant.com"     	             
   }; 
   var nano = require("nano")(cloudant.url);
   var db = nano.db.use("users");
-	if (dbCreds) {
-		console.log('URL is ' + dbCreds.url); 	
-		nano = require('nano')(dbCreds.url); 	
-		prints = nano.use('prints'); 
-	} else {  
-		console.log('NO DB!'); 
-	}
 
 
 
 
 
-app.use(helmet(function (req, res, next) {
+
+app.use(function (req, res, next) {
 
     if (req.secure) {
         
@@ -47,7 +40,7 @@ app.use(helmet(function (req, res, next) {
  
             res.redirect('https://' + req.headers.host + req.url);
     }
-}));
+});
 
 app.get('/', function(req, res) {
 
