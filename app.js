@@ -29,30 +29,8 @@ var appEnv = cfenv.getAppEnv();
 
 
 
-  //app.use(helmet.hsts({
-	//  maxAge: 7776000000,
-	//  includeSubdomains: true
-	//}));
 
-
-  app.use(helmet());
-
-app.use(helmet.contentSecurityPolicy({
-	
-
-		  // Specify directives as normal.
-		  directives: {
-		    defaultSrc: ["'self'", 'default.com'],
-		    scriptSrc: ["'self'", "'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js','https://code.jquery.com/jquery-latest.min.js','/socket.io/socket.io.js'"],
-		    styleSrc: ['https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'],
-		    fontSrc: ["'self'", 'fonts.com'],
-		    imgSrc: ['img.com', 'data:'],
-		    sandbox: ['allow-forms', 'allow-scripts'],
-		    reportUri: '/report-violation',
-		    objectSrc: ["'none'"],
-		    upgradeInsecureRequests: true
-		  },
-}));
+ app.use(helmet());
 
 
 
