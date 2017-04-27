@@ -2,7 +2,7 @@
 var express = require('express');
 var app = express();
 
-var helmet = require('helmet')
+var helmet = require('helmet');
 var server = require('http').createServer(app);
 
 
