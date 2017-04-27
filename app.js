@@ -13,7 +13,7 @@ app.enable('trust proxy');
 
 server.listen(8080);
 
-app.use(helmet());
+
 
 var cfenv = require('cfenv');
 var appEnv = cfenv.getAppEnv();
@@ -38,7 +38,7 @@ var appEnv = cfenv.getAppEnv();
 
 
 
-app.use(function (req, res, next) {
+app.use(helmet(function (req, res, next) {
 
     if (req.secure) {
         
@@ -47,7 +47,7 @@ app.use(function (req, res, next) {
  
             res.redirect('https://' + req.headers.host + req.url);
     }
-});
+}));
 
 app.get('/', function(req, res) {
 
