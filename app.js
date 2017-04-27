@@ -1,6 +1,8 @@
 
 var express = require('express');
 var app = express();
+
+var helmet = require('helmet')
 var server = require('http').createServer(app);
 
 
@@ -11,6 +13,7 @@ app.enable('trust proxy');
 
 server.listen(8080);
 
+app.use(helmet());
 
 var cfenv = require('cfenv');
 var appEnv = cfenv.getAppEnv();
