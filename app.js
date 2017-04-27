@@ -27,6 +27,12 @@ var appEnv = cfenv.getAppEnv();
   var db = nano.db.use("users");
 
 
+app.configure(function() {
+
+	app.use(helmet.xssFilter());
+	app.use(helmet.contentSecurityPolicy());
+	
+})
 
 
 
