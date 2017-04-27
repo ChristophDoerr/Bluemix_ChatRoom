@@ -1,3 +1,17 @@
+
+var express = require('express');
+var app = express();
+var server = require('http').createServer(app);
+
+
+var io = require('socket.io').listen(server);
+var users = {};
+
+app.enable('trust proxy');
+
+server.listen(8080);
+
+
 var cfenv = require('cfenv');
 var appEnv = cfenv.getAppEnv();
   var dbCreds =  appEnv.getServiceCreds('Cloudant NoSQL DB-08');  
@@ -20,20 +34,9 @@ var appEnv = cfenv.getAppEnv();
 
 
 
-var express = require('express');
-var app = express();
-var server = require('http').createServer(app);
-
-
-var io = require('socket.io').listen(server);
-var users = {};
-
-app.enable('trust proxy');
-
-server.listen(8080);
 
 app.use(function (req, res, next) {
-	res.setHeader('Content-Security-Policy');
+
     if (req.secure) {
         
             next();
