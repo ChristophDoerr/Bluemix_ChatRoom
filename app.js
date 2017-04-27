@@ -29,8 +29,18 @@ var appEnv = cfenv.getAppEnv();
 
 
 
-	app.use(helmet.xssFilter());
-	app.use(helmet.contentSecurityPolicy());
+  app.use(helmet.csp({
+	  defaultSrc: ["'self'"],
+	  scriptSrc: ['*.google-analytics.com'],
+	  styleSrc: ["'unsafe-inline'"],
+	  imgSrc: ['*.google-analytics.com'],
+	  connectSrc: ["'none'"],
+	  fontSrc: [],
+	  objectSrc: [],
+	  mediaSrc: [],
+	  frameSrc: []
+	}));
+
 	
 
 
