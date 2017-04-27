@@ -33,6 +33,7 @@ app.enable('trust proxy');
 server.listen(8080);
 
 app.use(function (req, res, next) {
+	res.setHeader('Content-Security-Policy');
     if (req.secure) {
         
             next();
@@ -43,7 +44,7 @@ app.use(function (req, res, next) {
 });
 
 app.get('/', function(req, res) {
-	res.setHeader('Content-Security-Policy');
+
 	res.sendFile(__dirname + '/index.html');
 });
 
