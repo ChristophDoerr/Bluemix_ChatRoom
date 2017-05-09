@@ -112,6 +112,13 @@
 			var $messageForm = $('#send-message');
 			var $messageBox = $('#message');
 			var $chat = $('#chat');
+			
+			$.getJSON('/instanceId', function(response, statusText, jqXHR) {
+				  if(jqXHR.status == 200) {
+				    $('#instance-id').show();
+				    $('#instance-id-value').html(response.id);
+				  }
+				});
 
 		$nickNameForm.submit(function(e) {
 		
@@ -186,6 +193,12 @@
 
 		});
 	</script>
+
+
+ <footer>
+ <p>Instance ID: </p>
+  <p id="instance-id" style="display: none;">Instance ID: <span id="instance-id-value"></span></p>
+</footer> 
 
 
 </body>
