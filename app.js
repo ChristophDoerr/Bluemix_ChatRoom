@@ -27,17 +27,17 @@ var appEnv = cfenv.getAppEnv();
   var db = nano.db.use("users");
 
 
-  var instanceId = cfCore.app && cfCore.app != null ? cfCore.app.instance_id : undefined;
-  app.get('/instanceId', function(req, res) {
-    if(!instanceId) {
-      res.writeHeader(204);
-      res.end();
-    } else {
-      res.end(JSON.stringify({
-        id : instanceId
-      }));
-    }
-  });
+//  var instanceId = cfCore.app && cfCore.app != null ? cfCore.app.instance_id : undefined;
+// app.get('/instanceId', function(req, res) {
+ //  if(!instanceId) {
+ //     res.writeHeader(204);
+ //     res.end();
+ //   } else {
+  //    res.end(JSON.stringify({
+ //      id : instanceId
+ //     }));
+//    }
+ // });
 
 
  app.use(helmet());
