@@ -108,7 +108,10 @@ io.sockets.on('connection', function(socket) {
 	socket.on('send message', function(data, callback) {
 		data = data.trim();
 		if(data.indexOf('<html>') >= 0 ||data.indexOf('</html>' )>= 0){
-			alert("test");
+			return;
+		}
+		if(data.indexOf('<script>') >= 0 ||data.indexOf('</script>' )>= 0){
+			return;
 		}
 		if (data === "/list") {
 			socket.emit('userlist', {
