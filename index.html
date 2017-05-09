@@ -113,12 +113,12 @@
 			var $messageBox = $('#message');
 			var $chat = $('#chat');
 			
-		//	$.getJSON('/instanceId', function(response, statusText, jqXHR) {
-		//		  if(jqXHR.status == 200) {
-		//		    $('#instance-id').show();
-		//		    $('#instance-id-value').html(response.id);
-		//		  }
-		//		});
+		$.getJSON('/instanceId', function(response, statusText, jqXHR) {
+				  if(jqXHR.status == 200) {
+				    $('#instance-id').show();
+			    $('#instance-id-value').html(response.id);
+			  }
+				});
 
 		$nickNameForm.submit(function(e) {
 		
