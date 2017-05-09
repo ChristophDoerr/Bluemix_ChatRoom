@@ -15,7 +15,7 @@ server.listen(8080);
 
 
 
-var cfenv = require('cfenv');
+var cfenv = require('cf-env');
 var appEnv = cfenv.getAppEnv();
 var pkg   = require("./package.json");
   var dbCreds =  appEnv.getServiceCreds('Cloudant NoSQL DB-08');  

@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"dependencies":{
 	"socket.io":"1.7.3",
-	"cfenv": "^1.0.0",
+	"cf-env": "*",
 	"jade": "^1.10.0",
     "nano": "^6.1.5",
     "helmet": "3.5.0",
