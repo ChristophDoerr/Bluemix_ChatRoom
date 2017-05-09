@@ -26,7 +26,7 @@ var pkg   = require("./package.json");
   }; 
   var nano = require("nano")(cloudant.url);
   var db = nano.db.use("users");
-  var cfCore = cfEnv.getCore({name: pkg.name});
+  var cfCore = cfenv.getCore({name: pkg.name});
 
   var instanceId = cfCore.app && cfCore.app != null ? cfCore.app.instance_id : undefined;
  app.get('/instanceId', function(req, res) {
