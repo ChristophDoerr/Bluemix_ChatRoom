@@ -15,7 +15,8 @@ server.listen(8080);
 
 
 
-var cfenv = require('cf-env');
+var cfEnv = require('cf-env');
+var cfenv = require('cfenv');
 var appEnv = cfenv.getAppEnv();
 var pkg   = require("./package.json");
   var dbCreds =  appEnv.getServiceCreds('Cloudant NoSQL DB-08');  
@@ -26,7 +27,7 @@ var pkg   = require("./package.json");
   }; 
   var nano = require("nano")(cloudant.url);
   var db = nano.db.use("users");
-  var cfCore = cfenv.getCore({name: pkg.name});
+  var cfCore = cfEnv.getCore({name: pkg.name});
 
   var instanceId = cfCore.app && cfCore.app != null ? cfCore.app.instance_id : undefined;
  app.get('/instanceId', function(req, res) {
