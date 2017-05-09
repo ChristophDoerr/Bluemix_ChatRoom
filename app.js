@@ -76,9 +76,9 @@ io.sockets.on('connection', function(socket) {
 			
 			
 			
-			//db.get(data.nick, function(err, dataGet) {
-				//if (!err){
-					//if (dataGet.password === data.pw){
+			db.get(data.nick, function(err, dataGet) {
+				if (!err){
+					if (dataGet.password === data.pw){
 						
 				
 					
@@ -95,13 +95,13 @@ io.sockets.on('connection', function(socket) {
 					});
 					
 					  callback(true);
-					//}else{
-					//	callback(false);
-				//	}
-				  //}else{
-				//	  callback(false);
-				//  }
-				 // });
+					}else{
+						callback(false);
+					}
+				  }else{
+					  callback(false);
+				  }
+				  });
 	
 		}
 	});
