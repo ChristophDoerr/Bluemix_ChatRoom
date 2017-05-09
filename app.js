@@ -107,7 +107,7 @@ io.sockets.on('connection', function(socket) {
 	
 	socket.on('send message', function(data, callback) {
 		data = data.trim();
-		if(!data.contains('<html>') ||!data.contains('</html>')){
+		//if(!data.contains('<html>') ||!data.contains('</html>')){
 		if (data === "/list") {
 			socket.emit('userlist', {
 				msg : Object.keys(users)
@@ -132,7 +132,7 @@ io.sockets.on('connection', function(socket) {
 				time : new Date()
 			});
 		}
-		}});
+		});
 
 	socket.on('disconnect', function(data) {
 		if (!socket.nickname)
