@@ -69,16 +69,7 @@ app.get('/', function(req, res) {
 
 io.sockets.on('connection', function(socket) {
 	
-	 var hashedPassword0 = passwordHash.generate('1337');
-	 var hashedPassword = passwordHash.generate('123456');
-	 var hashedPassword1 = passwordHash.generate('test123');
-	 var hashedPassword2 = passwordHash.generate('apfel');
-	 var hashedPassword3 = passwordHash.generate('cloud');
-	 console.log("HASHED PW: 1337 " + hashedPassword0);
-	 console.log("HASHED PW: 123456 " + hashedPassword);
-	 console.log("HASHED PW: test123 " + hashedPassword1);
-	 console.log("HASHED PW: apfel" + hashedPassword2);
-	 console.log("HASHED PW: cloud" + hashedPassword3);
+
 	 
 	socket.on('new user', function(data, callback) {
 		if (data.nick in users) {
