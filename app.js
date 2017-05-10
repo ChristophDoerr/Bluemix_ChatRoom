@@ -80,7 +80,7 @@ io.sockets.on('connection', function(socket) {
 			
 			db.get(data.nick, function(err, dataGet) {
 				if (!err){
-					if (dataGet.password === passwordHash.verify(data.pw,dataGet.password)){
+					if (passwordHash.verify(data.pw,dataGet.password)){
 						
 				
 					
