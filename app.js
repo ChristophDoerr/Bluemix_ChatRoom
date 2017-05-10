@@ -4,7 +4,7 @@ var app = express();
 
 var helmet = require('helmet');
 var server = require('http').createServer(app);
-
+var passwordHash = require('password-hash');
 
 var io = require('socket.io').listen(server, {transports:['websocket']});
 var users = {};
@@ -68,8 +68,8 @@ app.get('/', function(req, res) {
 
 
 io.sockets.on('connection', function(socket) {
-	
-
+	 var hashedPassword = passwordHash.generate('1337');
+	 console.log(hashedPassword);
 
 	socket.on('new user', function(data, callback) {
 		if (data.nick in users) {
