@@ -1,13 +1,14 @@
 {
-	"name":"chat",
-	"version": "0.0.1",
-	"dependencies":{
-	"socket.io":"1.7.3",
-	"cfenv": "^1.0.0",
-	"cf-env": "*",
-	"jade": "^1.10.0",
-    "nano": "^6.1.5",
+  "name": "chat",
+  "version": "0.0.1",
+  "dependencies": {
+    "cf-env": "*",
+    "cfenv": "^1.0.0",
+    "express": "4.15.2",
     "helmet": "3.5.0",
-	"express" : "4.15.2"
-				}
+    "jade": "^1.10.0",
+    "nano": "^6.1.5",
+    "socket.io": "1.7.3",
+    "socket.io-redis": "^4.0.0"
+  }
 }

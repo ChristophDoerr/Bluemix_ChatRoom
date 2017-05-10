@@ -6,7 +6,7 @@ var helmet = require('helmet');
 var server = require('http').createServer(app);
 
 
-var io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server, {transports:['websocket']});
 var users = {};
 
 app.enable('trust proxy');
@@ -17,6 +17,8 @@ server.listen(8080);
 
 var cfEnv = require('cf-env');
 var cfenv = require('cfenv');
+var redis = require('socket.io-redis');
+io.adapter(redis({host:'pub-redis-10532.dal-05.1.sl.garantiadata.com', port: '10532', password:'nyrsAxtcsrIioVO0'}))
 //var appEnv = cfenv.getAppEnv();
 var pkg   = require("./package.json");
   //var dbCreds =  appEnv.getServiceCreds('Cloudant NoSQL DB-08');  
